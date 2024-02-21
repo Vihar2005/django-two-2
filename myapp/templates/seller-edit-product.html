@@ -1,0 +1,53 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<center>
+	<h1>Edit Product</h1>
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form name="signup" method="post" action="{% url 'seller-edit-product' pk=product.pk %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>Product Brand</td>
+				<td><input type="text" name="product_brand" value="{{product.product_brand}}"></td>
+			</tr>
+			<tr>
+				<td>Product Price</td>
+				<td><input type="text" name="product_price" value="{{product.product_price}}"></td>
+			</tr>
+			<tr>
+				<td>Product Size</td>
+				<td><input type="text" name="product_size" value="{{product.product_size}}"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				<img src="{{product.product_pic.url}}" width="100px" height="100px">
+				</td>
+			</tr>
+			<tr>
+				<td>Product Pic</td>
+				<td><input type="file" id="name" name="product_pic"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="action" value="Update Product" class="btn btn-primary">
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+		
+</center>
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,41 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<center>
+	<h1>Welcome To My login page</h1>
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form name="signup" method="post" action="{% url 'login' %}">
+		{% csrf_token %}
+		<table>
+			
+			<tr>
+				<td>Email</td>
+				<td><input type="email" name="email" placeholder="Email"></td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" id="name" name="password" placeholder="Password"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="action" value="Login" class="btn btn-primary">
+					<a href="{% url 'forgot-password' %}">Forgot Password?</a>
+				</td>
+
+			</tr>
+		</table>
+	</form>	
+</center>
+</body>
+</html>
+{% endblock %}

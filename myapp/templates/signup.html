@@ -1,0 +1,102 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<center>
+	<h1>Welcome To My signup page</h1>
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form name="signup" method="post" action="{% url 'signup' %}">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<select name="usertype">
+					<option>----Select User Type----</option>
+					<option value="buyer">Buyer</option>
+					<option value="seller">seller</option>
+
+				</select>
+			</tr>
+			<tr>
+				<td>First Name</td>
+				<td><input type="text" name="fname"></td>
+			</tr>
+			<tr>
+				<td>Last Name</td>
+				<td><input type="text" name="lname"></td>
+			</tr>
+			<tr>
+				<td>Email</td>
+				<td><input type="text" id="email" name="email" placeholder="Email">
+					<span id="email_error" style="color:red;"></span>
+				</td>
+			</tr>
+			<tr>
+				<td>Mobile</td>
+				<td><input type="text" name="mobile"></td>
+			</tr>
+			<tr>
+				<td>Address</td>
+				<td><textarea rows="5" cols="21" name="address"></textarea></td>
+			</tr>
+			<tr>
+				<td>Gender</td>
+				<td><input type="radio" name="gender" value="male">male
+					<input type="radio" name="gender" value="female">female
+				</td>
+			</tr>
+			<tr>
+				<td>Password</td>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<td>Confirm Password</td>
+				<td><input type="password" name="cpassword"></td>
+			</tr>
+			<tr>
+				<td>Profile Picture</td>
+				<td><input type="file" name="profile_pic" ></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="action" value="Sign Up" class="btn btn-primary">
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+		
+</center>
+	<script>
+          $("#email").change(function(){
+            var email=$(this).val();
+            
+            $.ajax({
+              url: '/ajax/validate_email/',
+              data: {
+                'email': email
+              },
+              dataType: 'json',
+              success: function (data) {
+                if (data.is_taken) {
+                  /*document.getElementById("email").style.border="5px solid red";*/
+                  document.getElementById("email_error").innerHTML="This Email ID Is Already Registered"
+                }else{
+                  document.getElementById("email_error").innerHTML="";
+                }
+              }
+            });
+          });
+
+    </script>
+</body>
+</html>
+{% endblock %}

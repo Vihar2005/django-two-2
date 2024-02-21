@@ -1,0 +1,40 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<center>
+	<h1>OTP Verification</h1>
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form name="signup" method="post" action="{% url 'verify-otp' %}">
+		{% csrf_token %}
+		<input type="hidden" name="mobile" value="{{mobile}}">
+		<input type="hidden" name="otp" value="{{otp}}">
+
+		<table>
+			
+			<tr>
+				<td>uopt</td>
+				<td><input type="text" name="uotp" placeholder="Enter your OTP"></td>
+			</tr>
+			
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="action" value="verify OTP" class="btn btn-primary">
+				</td>
+
+			</tr>
+		</table>
+	</form>	
+</center>
+</body>
+</html>
+{% endblock%}

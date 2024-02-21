@@ -1,0 +1,48 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+<center>
+	<h1>Add Product</h1>
+	{% if msg %}
+		<b style="color:blue;">{{msg}}</b>
+	{% endif %}
+	<form name="signup" method="post" action="{% url 'seller-add-product' %}" enctype="multipart/form-data">
+		{% csrf_token %}
+		<table>
+			<tr>
+				<td>Product Brand</td>
+				<td><input type="text" name="product_brand" placeholder="Enter brand name"></td>
+			</tr>
+			<tr>
+				<td>Product Price</td>
+				<td><input type="text" name="product_price" placeholder="Enter product price"></td>
+			</tr>
+			<tr>
+				<td>Product Size</td>
+				<td><input type="text" name="product_size" placeholder="Enter product size"></td>
+			</tr>
+			<tr>
+				<td>Product Pic</td>
+				<td><input type="file" id="name" name="product_pic"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" name="action" value="Add Product" class="btn btn-primary">
+				</td>
+			</tr>
+		</table>
+		
+	</form>
+		
+</center>
+</body>
+</html>
+{% endblock%}
